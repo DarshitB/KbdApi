@@ -28,15 +28,20 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({
       username: req.body.username,
     });
-    !user && res.status(401).json("wrong cradantial");
+    if (!user) {
+      res.status(404).json("wrong cradantial");
+      return;
+    }
     const hashpasswords = CryptoJS.AES.decrypt(
       user.password,
       process.env.PASS_SECTER
     );
     const Origipassword = hashpasswords.toString(CryptoJS.enc.Utf8);
 
-    Origipassword !== req.body.password &&
+    if (Origipassword !== req.body.password) {
       res.status(401).json("Wronf Password");
+      return;
+    }
 
     const aceesTocken = jwt.sign(
       {
