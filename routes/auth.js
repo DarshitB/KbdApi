@@ -26,7 +26,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({
-      username: req.body.username,
+      email: req.body.username,
     });
     if (!user) {
       res.status(404).json("wrong cradantial");
