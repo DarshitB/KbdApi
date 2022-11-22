@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
       productsPrice = await ProductPrice.findOne({
         width: pWidth,
         drop: pDrop,
-        band: pBand,
+        band: pBand.toUpperCase(),
       });
     }
     res.status(200).json(productsPrice);
