@@ -25,13 +25,15 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
 router.get("/", async (req, res) => {
   const pWidth = req.query.width;
   const pDrop = req.query.drop;
+  const pBand = req.query.band;
   try {
     let productsPrice;
 
-    if (pWidth && pDrop) {
+    if (pWidth && pDrop && pBand) {
       productsPrice = await ProductPrice.findOne({
         width: pWidth,
         drop: pDrop,
+        band: pBand,
       });
     }
     res.status(200).json(productsPrice);
