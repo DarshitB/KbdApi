@@ -28,18 +28,23 @@ router.get("/", async (req, res) => {
   const pBand = req.query.band;
   try {
     let productsPrice, getallprice;
-
+    var maxnumbervalue = [];
     if (pWidth && pDrop && pBand) {
       getallprice = await ProductPrice.find({
         band: pBand.toUpperCase(),
       });
-      productsPrice = await ProductPrice.findOne({
+      getallprice.forEach(function () {
+        if (getallprice.width >= pWidth) {
+          maxnumbervalue.push(getallprice.width);
+        }
+      });
+      /*  productsPrice = await ProductPrice.findOne({
         width: pWidth,
         drop: pDrop,
         band: pBand.toUpperCase(),
-      });
+      }); */
     }
-    res.status(200).json(getallprice);
+    res.status(200).json(maxnumbervalue);
   } catch (err) {
     res.status(500).json(err);
   }
