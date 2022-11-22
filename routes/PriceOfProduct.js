@@ -27,10 +27,10 @@ router.get("/", async (req, res) => {
   const pDrop = req.query.drop;
   const pBand = req.query.band;
   try {
-    let productsPrice;
+    let productsPrice, getallprice;
 
     if (pWidth && pDrop && pBand) {
-      const getallprice = await ProductPrice.find({
+      getallprice = await ProductPrice.find({
         band: pBand.toUpperCase(),
       });
       productsPrice = await ProductPrice.findOne({
