@@ -29,7 +29,7 @@ router.get("/", async (req, res) => {
     let productsPrice;
 
     if (pWidth && pDrop && pBand) {
-      productsPrice = await ProductPrice.find({
+      productsPrice = await ProductPrice.findOne({
         width: pWidth,
         drop: pDrop,
       });
