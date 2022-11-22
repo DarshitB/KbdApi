@@ -9,7 +9,7 @@ const router = require("express").Router();
 
 //CREATE
 
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", verifyTokenAndAdmin, async (req, res) => {
   const newProductPrice = new ProductPrice(req.body);
   try {
     const savedProductprice = await newProductPrice.save();
