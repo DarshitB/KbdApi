@@ -27,24 +27,30 @@ router.get("/", async (req, res) => {
   const pDrop = req.query.drop;
   const pBand = req.query.band;
   try {
-    let productsPrice, getallprice;
-    var maxnumbervalue = [];
+    let productsPrice, getallprice, forshow;
+    var maxnumbervaluewidth = [];
+    var maxnumbervaluedrop = [];
     if (pWidth && pDrop && pBand) {
       getallprice = await ProductPrice.find({
         band: pBand.toUpperCase(),
       });
-      getallprice.forEach(function () {
-        if (getallprice.width >= pWidth) {
-          maxnumbervalue.push(getallprice.width);
+      getallprice.forEach(function (element) {
+        if (element.width >= pWidth) {
+          maxnumbervaluewidth.push(element.width);
+        }
+        if (element.drop >= pDrop) {
+          maxnumbervaluedrop.push(element.drop);
         }
       });
-      /*  productsPrice = await ProductPrice.findOne({
-        width: pWidth,
-        drop: pDrop,
+      const productsWidth = Math.min(...maxnumbervaluewidth);
+      const productsDrop = Math.min(...maxnumbervaluedrop);
+      productsPrice = await ProductPrice.findOne({
+        width: productsWidth,
+        drop: productsDrop,
         band: pBand.toUpperCase(),
-      }); */
+      });
     }
-    res.status(200).json(maxnumbervalue);
+    res.status(200).json(productsPrice);
   } catch (err) {
     res.status(500).json(err);
   }
