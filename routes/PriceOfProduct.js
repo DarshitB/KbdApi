@@ -21,4 +21,24 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+//GET PRODUCTS PRICE
+router.get("/", async (req, res) => {
+  const pWidth = req.query.width;
+  const pDrop = req.query.drop;
+  const pBand = req.query.band;
+  try {
+    let productsPrice;
+
+    if (pWidth && pDrop && pBand) {
+      productsPrice = await ProductPrice.find({
+        width: { pWidth },
+        drop: { pDrop },
+        band: { pBand },
+      });
+    }
+    res.status(200).json(productsPrice);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;
