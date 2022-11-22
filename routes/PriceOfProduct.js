@@ -25,7 +25,6 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
 router.get("/", async (req, res) => {
   const pWidth = req.query.width;
   const pDrop = req.query.drop;
-  const pBand = req.query.band;
   try {
     let productsPrice;
 
@@ -33,7 +32,6 @@ router.get("/", async (req, res) => {
       productsPrice = await ProductPrice.find({
         width: { pWidth },
         drop: { pDrop },
-        band: { pBand },
       });
     }
     res.status(200).json(productsPrice);
