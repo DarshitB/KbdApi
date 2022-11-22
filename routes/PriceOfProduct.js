@@ -30,8 +30,8 @@ router.get("/", async (req, res) => {
 
     if (pWidth && pDrop && pBand) {
       productsPrice = await ProductPrice.find({
-        width: { pWidth },
-        drop: { pDrop },
+        width: pWidth,
+        drop: pDrop,
       });
     }
     res.status(200).json(productsPrice);
