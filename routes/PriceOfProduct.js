@@ -30,13 +30,16 @@ router.get("/", async (req, res) => {
     let productsPrice;
 
     if (pWidth && pDrop && pBand) {
+      const getallprice = await ProductPrice.find({
+        band: pBand.toUpperCase(),
+      });
       productsPrice = await ProductPrice.findOne({
         width: pWidth,
         drop: pDrop,
         band: pBand.toUpperCase(),
       });
     }
-    res.status(200).json(productsPrice);
+    res.status(200).json(getallprice);
   } catch (err) {
     res.status(500).json(err);
   }
