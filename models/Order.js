@@ -9,10 +9,14 @@ const OrderSchema = new mongoose.Schema(
         productId: { type: String },
         Width: { type: String },
         Drop: { type: String },
-        FittingOption: { type: String },
         SizeOption: { type: String },
         ControlOption: { type: String },
-        CassetteOption: { type: String },
+        FabricOption: { type: String },
+        WrappedOption: { type: String },
+        TopFixing: { type: String },
+        OperatingSystem: [
+          { OperatingType: { type: String }, Operatingid: { type: String } },
+        ],
         quantity: {
           type: Number,
           default: 1,
