@@ -11,21 +11,10 @@ const router = require("express").Router();
 
 router.post("/", verifyTokenAndAdmin, async (req, res) => {
   const newProductPrice = new ProductPrice(req.body);
-  var checkdata;
   try {
-    checkdata = await ProductPrice.find({
-      width: newProductPrice.width,
-      drop: newProductPrice.drop,
-      band: newProductPrice.band,
-    });
-    if (checkdata.length === 0) {
-      const savedProductprice = await newProductPrice.save();
-      res.status(200).json(savedProductprice);
-      return;
-    } else {
-      console.log("this data is exist in the database");
-      return;
-    }
+    const savedProductprice = await newProductPrice.save();
+    res.status(200).json(savedProductprice);
+    return;
   } catch (err) {
     res.json(err);
     return;
