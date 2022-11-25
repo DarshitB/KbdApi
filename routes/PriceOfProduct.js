@@ -18,7 +18,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
       drop: newProductPrice.drop,
       band: newProductPrice.band,
     });
-    if (checkdata === null || checkdata.length == 0) {
+    if (checkdata.length === 0) {
       const savedProductprice = await newProductPrice.save();
       res.status(200).json(savedProductprice);
       return;
