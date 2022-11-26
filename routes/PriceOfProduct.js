@@ -28,7 +28,6 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
     }
   } catch (err) {
     res.json(err);
-    console.log("fdsf");
     return;
   }
 });
