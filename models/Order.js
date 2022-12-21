@@ -16,8 +16,9 @@ const OrderSchema = new mongoose.Schema(
         TopFixing: { type: String },
         OperatingSystem: [
           {
-            OperatingType: { type: String },
-            Operatingid: { type: String },
+            Motorised: { type: String },
+            Remote: { type: String },
+            Accessories: { type: String },
           },
         ],
         quantity: {
