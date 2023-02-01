@@ -5,6 +5,7 @@ const FabricsSchema = new mongoose.Schema({
   fabric: { type: String, required: true },
   fabricName: { type: String, required: true },
   fabImg: { type: String, required: true },
+  img: { type: Array, required: true },
   band: { type: String, required: true },
 });
 
