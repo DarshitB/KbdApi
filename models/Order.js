@@ -9,6 +9,7 @@ const OrderSchema = new mongoose.Schema(
         productId: { type: String },
         Width: { type: String },
         Drop: { type: String },
+        type: { type: String },
         SizeOption: { type: String },
         ControlOption: { type: String },
         FabricOption: { type: String },
