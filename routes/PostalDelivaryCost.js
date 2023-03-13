@@ -49,4 +49,28 @@ router.get("/", async (req, res) => {
   }
 });
 
+//GET DISTINT CITY
+router.get("/city", async (req, res) => {
+  try {
+    const cities = await PostalcodePrice.distinct("city");
+    res.status(200).json(cities);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET postalcode according to city
+router.get("/postcode", async (req, res) => {
+  const city = req.query.city;
+  const query = { city: city };
+  try {
+    if (city) {
+      const postcodes = await PostalcodePrice.distinct("postcode", query);
+      res.status(200).json(postcodes);
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;
