@@ -8,6 +8,7 @@ const ProductRoute = require("./routes/products");
 const cartRoute = require("./routes/cart");
 const ordersRoute = require("./routes/orders");
 const PriceOfProduct = require("./routes/PriceOfProduct");
+const PostalDelivaryCost = require("./routes/PostalDelivaryCost");
 const Fabrics = require("./routes/AllFabrics");
 var cors = require("cors");
 app.use(cors());
@@ -28,6 +29,7 @@ app.use("/api/cart", cartRoute);
 app.use("/api/orders", ordersRoute);
 app.use("/api/Fabrics", Fabrics);
 app.use("/api/PriceOfProduct", PriceOfProduct);
+app.use("/api/PostalDelivaryCost", PostalDelivaryCost);
 app.listen(process.env.PORT || 5000, () => {
   console.log("server is establiesd");
 });
