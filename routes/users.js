@@ -207,12 +207,12 @@ router.put("/profile/:id", upload.single("profileImage"), async (req, res) => {
       if (user.profileImage) {
         fs.unlinkSync("images/profiles/" + user.profileImage);
       }
-      const imagePath = profileImage.destination + profileImage.filename;
-      const updatedImagePath = imagePath.replace(/\//g, "\\");
-      const compressedFabricImage = await sharp(updatedImagePath)
-        .resize(140)
+      /* const imagePath = profileImage.destination + profileImage.filename;
+      const updatedImagePath = imagePath.replace(/\//g, "\\"); */
+      const compressedFabricImage = await sharp(profileImage.path)
+        .resize(200)
         .toBuffer();
-      fs.writeFileSync(updatedImagePath, compressedFabricImage);
+      fs.writeFileSync(profileImage.path, compressedFabricImage);
       const Profimage = profileImage.filename;
       user.username = username;
       user.profileImage = Profimage;
