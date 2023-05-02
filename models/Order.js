@@ -11,11 +11,18 @@ const OrderSchema = new mongoose.Schema(
         Width: { type: String },
         Drop: { type: String },
         type: { type: String },
-        SizeOption: { type: String },
         ControlOption: { type: String },
         FabricOption: { type: String },
+        /* Roller */
+        SizeOption: { type: String },
         WrappedOption: { type: String },
         TopFixing: { type: String },
+        /* Verticale */
+        ChainControl: { type: String },
+        OpeningDirection: { type: String },
+        MountingBracket: { type: String },
+        BallChainHook: { type: String },
+        MetelBallChain: { type: String },
         OperatingSystem: [
           {
             Motorised: { type: String },
@@ -30,7 +37,7 @@ const OrderSchema = new mongoose.Schema(
       },
     ],
     amount: { type: Number, required: true },
-    userAddress: [
+    ShippingAddress: [
       {
         FirstName: { type: String },
         LastName: { type: String },
@@ -39,6 +46,19 @@ const OrderSchema = new mongoose.Schema(
         City: { type: String },
         Postcode: { type: String },
         PhoneNo: { type: String },
+        Email: { type: String },
+      },
+    ],
+    BillingAddress: [
+      {
+        FirstName: { type: String },
+        LastName: { type: String },
+        Address: { type: String },
+        Country: { type: String },
+        City: { type: String },
+        Postcode: { type: String },
+        PhoneNo: { type: String },
+        Email: { type: String },
       },
     ],
     shipingMathod: { type: String, required: true },
@@ -50,6 +70,9 @@ const OrderSchema = new mongoose.Schema(
     ],
     paymentMethod: { type: String, required: true },
     Status: { type: String, default: "pending" },
+    orderStatus: { type: String, default: "PENDING" },
+    orderTrackLink: { type: String },
+    orderTrackId: { type: String },
   },
   { timestamps: true }
 );

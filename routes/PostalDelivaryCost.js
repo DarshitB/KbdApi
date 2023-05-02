@@ -23,7 +23,7 @@ router.post("/", verifyTokenAndAdmin, async (req, res) => {
       res.status(200).json(savedPostalcodePrice);
       return;
     } else {
-      res.status(400).json("this data is exist in the database");
+      res.status(400).json("This data already exists, try another one.");
       return;
     }
   } catch (err) {
@@ -73,4 +73,53 @@ router.get("/postcode", async (req, res) => {
   }
 });
 
+// //GET ALL
+
+router.get("/getAll", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const PostalcodeDelivary = await PostalcodePrice.find();
+    res.status(200).json(PostalcodeDelivary);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//DELETE
+router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    await PostalcodePrice.findByIdAndDelete(req.params.id);
+    res.status(200).json("User has been deleted...");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//GET SINGLE
+router.get("/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const PostalcodeDelivary = await PostalcodePrice.findById(req.params.id);
+    res.status(200).json(PostalcodeDelivary);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+//Update PostalDelivarycost
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const updatedpostcot = await PostalcodePrice.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          city: req.body.city,
+          postcode: req.body.postcode,
+          delivaryCost: req.body.delivaryCost,
+        },
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedpostcot);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;

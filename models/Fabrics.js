@@ -7,6 +7,7 @@ const FabricsSchema = new mongoose.Schema({
   fabImg: { type: String, required: true },
   img: { type: Array, required: true },
   band: { type: String, required: true },
+  type: { type: String, required: true },
 });
 
 module.exports = mongoose.model("Fabrics", FabricsSchema);

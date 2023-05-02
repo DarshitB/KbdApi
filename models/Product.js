@@ -7,9 +7,11 @@ const ProductsSchema = new mongoose.Schema(
     img: { type: Array, required: true },
     type: { type: Array, required: true },
     color: { type: Array, required: true },
-    fabrics: { type: Array, required: true },
+    fabrics: { type: Array, required: false },
     price: { type: Number, required: true },
     inStock: { type: Boolean, default: true },
+    stock: { type: Number, required: true },
+    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
