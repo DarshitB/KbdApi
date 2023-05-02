@@ -205,7 +205,10 @@ router.put("/profile/:id", upload.single("profileImage"), async (req, res) => {
       await user.save();
     } else {
       if (user.profileImage) {
-        fs.unlinkSync("images/profiles/" + user.profileImage);
+        const path = "images/profiles/" + user.profileImage;
+        if (fs.existsSync(path)) {
+          fs.unlinkSync(path);
+        }
       }
       /* const imagePath = profileImage.destination + profileImage.filename;
       const updatedImagePath = imagePath.replace(/\//g, "\\"); */
