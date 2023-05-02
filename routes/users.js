@@ -204,9 +204,9 @@ router.put("/profile/:id", upload.single("profileImage"), async (req, res) => {
       user.username = username;
       await user.save();
     } else {
-      if (user.profileImage) {
+      /* if (user.profileImage) {
         fs.unlinkSync("images/profiles/" + user.profileImage);
-      }
+      } */
       /* const imagePath = profileImage.destination + profileImage.filename;
       const updatedImagePath = imagePath.replace(/\//g, "\\"); */
       const compressedFabricImage = await sharp(profileImage.path)
