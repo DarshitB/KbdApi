@@ -10,7 +10,7 @@ const ProductsSchema = new mongoose.Schema(
     fabrics: { type: Array, required: false },
     price: { type: Number, required: true },
     inStock: { type: Boolean, default: true },
-    stock: { type: Number, required: true },
+    stock: { type: Number },
     isActive: { type: Boolean, default: true },
   },
   { timestamps: true }

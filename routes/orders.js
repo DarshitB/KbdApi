@@ -1,4 +1,5 @@
 const Order = require("../models/Order");
+const Product = require("../models/Product");
 const {
   verifyToken,
   verifyTokenAndAuthorization,
@@ -7,18 +8,64 @@ const {
 
 const router = require("express").Router();
 
+const nodemailer = require("nodemailer");
+
 //CREATE
 
 router.post("/", verifyToken, async (req, res) => {
   const newOrder = new Order(req.body);
-  try {
-    const savedOrder = await newOrder.save();
-    res.status(200).json(savedOrder);
-    return;
-  } catch (err) {
-    res.json(err);
-    return;
+  const userEmail = newOrder.ShippingAddress[0].Email;
+  let config = {
+    service: "gmail",
+    auth: {
+      user: process.env.sendmileuser,
+      pass: process.env.sendmilepass,
+    },
+  };
+  let transporter = nodemailer.createTransport(config);
+
+  let productsHtml = "";
+  for (let i = 0; i < newOrder.produts.length; i++) {
+    const product = newOrder.produts[i];
+    const getProduct = await Product.findById(product.productId);
+    if (product.type === "Roller") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, ControlOption: ${product.ControlOption}, FabricOption: ${product.FabricOption}, SizeOption: ${product.SizeOption}, WrappedOption: ${product.WrappedOption}, TopFixing: ${product.TopFixing},  MotoreHead ${product.OperatingSystem[0].Motorised}, RemoteHead - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    } else if (product.type === "Vertical") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, ControlOption: ${product.ControlOption}, FabricOption: ${product.FabricOption}, ChainControl: ${product.ChainControl}, OpeningDirection: ${product.OpeningDirection}, MountingBracket: ${product.MountingBracket}, BallChainHook: ${product.BallChainHook}, MetelBallChain: ${product.MetelBallChain}, MotoreHead ${product.OperatingSystem[0].Motorised}, RemoteHead - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    }
   }
+
+  let sendHtmlFormofotp = `<div style='width:100%;'><div style='border-radius: 8px;border: 1px solid rgb(220, 220, 220);background-color: rgb(250, 250, 250);padding:20px;'><h5 style="text-align:center;background-color: #d4edda;font-size:30px;border-radius: 8px;padding:10px 0;margin-top:0;margin-bottom:20px">Order placed Successfully</h5><h6 style="font-size:25px;margin-bottom:0.7rem;margin-top:1.5rem;"><b>Order Id: ${newOrder._id}</b></h6><p style="margin-top:0;margin-bottom:1rem;color:#28a745">Estimated Delivary : ${newOrder.deliveryDate}</p><table>${productsHtml}</table><p style="text-align: right;font-size:25px;margin:1.5rem 0">Order Value: € ${newOrder.amount}</p></div></div>`;
+
+  let message = {
+    from: `Kbd Blinds <${process.env.sendmileuser}>`,
+    to: userEmail,
+    subject: "your order is success full placed",
+    html: sendHtmlFormofotp,
+  };
+
+  transporter
+    .sendMail(message)
+    .then(() => {
+      const savedOrder = newOrder.save();
+      res.status(200).json(savedOrder);
+      return;
+    })
+    .catch((error) => {
+      return res.status(501).json({ error });
+    });
 });
 
 //UPDATE
