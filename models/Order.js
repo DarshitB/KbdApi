@@ -8,6 +8,7 @@ const OrderSchema = new mongoose.Schema(
     produts: [
       {
         productId: { type: String },
+        productcost: { type: String },
         Width: { type: String },
         Drop: { type: String },
         type: { type: String },
@@ -62,12 +63,16 @@ const OrderSchema = new mongoose.Schema(
       },
     ],
     shipingMathod: { type: String, required: true },
+    shipingCost: { type: String },
     installationServices: [
       {
         installationArea: { type: String },
         Appointment: { type: String },
+        cost: { type: String },
       },
     ],
+    subTotalIncVAt: { type: String },
+    Discount: { type: String },
     paymentMethod: { type: String, required: true },
     Status: { type: String, default: "pending" },
     orderStatus: { type: String, default: "PENDING" },
