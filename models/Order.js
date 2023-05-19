@@ -14,16 +14,29 @@ const OrderSchema = new mongoose.Schema(
         type: { type: String },
         ControlOption: { type: String },
         FabricOption: { type: String },
-        /* Roller */
-        SizeOption: { type: String },
-        WrappedOption: { type: String },
-        TopFixing: { type: String },
-        /* Verticale */
+        /*  */
+        pleatSize: { type: String },
+        /*  */
+        Headrail: { type: String },
+        OneTouchUpSystem: { type: String },
+        PlainCassette: { type: String },
+        /*  */
         ChainControl: { type: String },
         OpeningDirection: { type: String },
         MountingBracket: { type: String },
         BallChainHook: { type: String },
         MetelBallChain: { type: String },
+        /*  */
+        DecoraruveCassette: { type: String },
+        /*  */
+        ClutchOperating: { type: String },
+        MotorisedBottomDownSystem: { type: String },
+        DayNight: { type: String },
+        TopDownBottomUpSystem: { type: String },
+        /*  */
+        OneTouchDownSystem: { type: String },
+        LiningOption: { type: String },
+        /*  */
         OperatingSystem: [
           {
             Motorised: { type: String },

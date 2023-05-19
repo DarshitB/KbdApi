@@ -9,7 +9,7 @@ const router = require("express").Router();
 
 //CREATE
 
-router.post("/", verifyTokenAndAdmin, async (req, res) => {
+router.post("/", async (req, res) => {
   const newProductPrice = req.body;
   let checkdata;
   try {
@@ -70,13 +70,15 @@ router.get("/", async (req, res) => {
   const pWidth = req.query.width;
   const pDrop = req.query.drop;
   const pBand = req.query.band;
+  const pType = req.query.type;
   try {
     let productsPrice, getallprice, forshow;
     var maxnumbervaluewidth = [];
     var maxnumbervaluedrop = [];
-    if (pWidth && pDrop && pBand) {
+    if (pWidth && pDrop && pBand && pType) {
       getallprice = await ProductPrice.find({
         band: pBand.toUpperCase(),
+        type: pType,
       });
       getallprice.forEach(function (element) {
         if (element.width >= pWidth) {
@@ -92,6 +94,7 @@ router.get("/", async (req, res) => {
         width: productsWidth,
         drop: productsDrop,
         band: pBand.toUpperCase(),
+        type: pType,
       });
     }
     res.status(200).json(productsPrice);

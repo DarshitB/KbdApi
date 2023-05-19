@@ -1,4 +1,5 @@
 const Fabrics = require("../models/Fabrics");
+const Product = require("../models/Product");
 const {
   verifyToken,
   verifyTokenAndAuthorization,
@@ -277,17 +278,40 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     const slectedFabric = await Fabrics.findById(req.params.id);
     if (slectedFabric) {
       slectedFabric.img.forEach((image) => {
-        fs.unlinkSync("images/febrickBlind/" + image);
+        const pathblind = "images/febrickBlind/" + image;
+        if (fs.existsSync(pathblind)) {
+          fs.unlinkSync(pathblind);
+        }
       });
-      fs.unlinkSync("images/fabrics/" + slectedFabric.fabImg);
+      const path = "images/fabrics/" + slectedFabric.fabImg;
+      if (fs.existsSync(path)) {
+        fs.unlinkSync(path);
+      }
 
+      const fabricuniquId = slectedFabric.uniquId;
+
+      // Find the products that contain the fabric ID in the fabrics array
+      const productshavefabric = await Product.find({ fabrics: fabricuniquId });
+
+      // Remove fabric from associated products
+
+      for (let i = 0; i < productshavefabric.length; i++) {
+        const product = productshavefabric[i];
+        product.fabrics = product.fabrics.filter(
+          (fabric) => String(fabric) !== fabricuniquId
+        );
+        await product.save();
+      }
+      // Save the updated product
+      // Delete the fabric
       await slectedFabric.remove();
       res.status(200).json("Fabrics has been deleted...");
     } else {
       res.status(404).json("Fabrics not found");
     }
   } catch (err) {
-    res.status(500).json(err);
+    console.error(err);
+    res.status(501).json(err);
   }
 });
 //DELETE All

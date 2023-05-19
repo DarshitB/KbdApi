@@ -10,6 +10,8 @@ const ordersRoute = require("./routes/orders");
 const PriceOfProduct = require("./routes/PriceOfProduct");
 const PostalDelivaryCost = require("./routes/PostalDelivaryCost");
 const Fabrics = require("./routes/AllFabrics");
+const OperatingSystem = require("./routes/operatingSystem");
+const Additionalcost = require("./routes/AdditionalcostPrice");
 var cors = require("cors");
 app.use(cors());
 dotenv.config();
@@ -31,6 +33,8 @@ app.use("/api/orders", ordersRoute);
 app.use("/api/Fabrics", Fabrics);
 app.use("/api/PriceOfProduct", PriceOfProduct);
 app.use("/api/PostalDelivaryCost", PostalDelivaryCost);
+app.use("/api/OperatingSystem", OperatingSystem);
+app.use("/api/Additionalcost", Additionalcost);
 app.use("/api/images", express.static("images"));
 app.listen(process.env.PORT || 5000, () => {
   console.log("server is establiesd");

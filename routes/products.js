@@ -157,7 +157,10 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     const findProduct = await Product.findById(req.params.id);
     if (findProduct) {
       findProduct.img.forEach((image) => {
-        fs.unlinkSync("images/febrickBlind/" + image);
+        const path = "images/febrickBlind/" + image;
+        if (fs.existsSync(path)) {
+          fs.unlinkSync(path);
+        }
       });
       await findProduct.remove();
       res.status(200).json("Product has been deleted...");
