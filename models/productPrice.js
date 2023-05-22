@@ -6,6 +6,7 @@ const ProductPriceSchema = new mongoose.Schema(
     drop: { type: Number, required: true },
     band: { type: String, required: true },
     type: { type: String, required: true },
+    trackFilter: { type: String },
     price: { type: Number, required: true },
   },
   { timestamps: true }

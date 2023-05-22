@@ -16,6 +16,7 @@ const OrderSchema = new mongoose.Schema(
         FabricOption: { type: String },
         /*  */
         pleatSize: { type: String },
+        Track: { type: String },
         /*  */
         Headrail: { type: String },
         OneTouchUpSystem: { type: String },

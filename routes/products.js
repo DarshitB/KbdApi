@@ -29,17 +29,8 @@ router.post(
   upload.array("img", 10),
   async (req, res) => {
     try {
-      const {
-        title,
-        desc,
-        type,
-        color,
-        fabrics,
-        price,
-        inStock,
-        stock,
-        isActive,
-      } = req.body;
+      const { title, desc, type, fabrics, price, isActive, searchKeyword } =
+        req.body;
       var imageo = [];
       const blindImages = req.files;
       /* for (var i = 0; i < req.files.length; i++) {
@@ -57,16 +48,17 @@ router.post(
         });
       }
       const fabricsArray = fabrics.split(",").map((fabric) => fabric.trim());
+      const KeywodArray = searchKeyword
+        .split(",")
+        .map((keyword) => keyword.trim());
       const newProduct = new Product({
         title,
         desc,
         img: imageo,
         type,
-        color,
         fabrics: fabricsArray,
         price,
-        inStock,
-        stock,
+        searchKeyword: KeywodArray,
         isActive,
       });
       const savedProduct = await newProduct.save();
@@ -97,21 +89,21 @@ router.put(
   upload.array("img", 10),
   async (req, res) => {
     try {
-      const { title, desc, color, fabrics, price, inStock, stock, isActive } =
-        req.body;
+      const { title, desc, fabrics, searchKeyword, price, isActive } = req.body;
       const blindImages = req.files;
 
       const updatedProduct = await Product.findById(req.params.id);
       const outputFabricArray = fabrics.split(",");
+      const KeywodArray = searchKeyword
+        .split(",")
+        .map((keyword) => keyword.trim());
 
       if (blindImages.length == 0) {
         updatedProduct.title = title;
         updatedProduct.desc = desc;
-        updatedProduct.color = color;
         updatedProduct.price = parseFloat(price);
-        updatedProduct.inStock = inStock;
-        updatedProduct.stock = parseInt(stock);
         updatedProduct.isActive = isActive;
+        updatedProduct.searchKeyword = KeywodArray;
         if (fabrics) {
           if (outputFabricArray.length >= 1) {
             updatedProduct.fabrics.push(...outputFabricArray);
@@ -131,11 +123,9 @@ router.put(
         });
         updatedProduct.title = title;
         updatedProduct.desc = desc;
-        updatedProduct.color = color;
         updatedProduct.price = parseFloat(price);
-        updatedProduct.inStock = inStock;
-        updatedProduct.stock = parseInt(stock);
         updatedProduct.isActive = isActive;
+        updatedProduct.searchKeyword = KeywodArray;
         if (fabrics) {
           if (outputFabricArray.length >= 1) {
             updatedProduct.fabrics.push(...outputFabricArray);
@@ -273,4 +263,51 @@ router.patch(
     }
   }
 );
+
+router.get("/search", async (req, res) => {
+  const searchTerm = req.query.searchTerm.toLowerCase();
+  try {
+    let result = await Product.aggregate([
+      { $match: { searchKeyword: { $regex: searchTerm, $options: "i" } } },
+      { $unwind: "$searchKeyword" },
+      { $match: { searchKeyword: { $regex: searchTerm, $options: "i" } } },
+      {
+        $group: {
+          _id: "$searchKeyword",
+          count: {
+            $sum: {
+              $cond: [
+                { $eq: [{ $toLower: "$searchKeyword" }, searchTerm] },
+                2,
+                1,
+              ],
+            },
+          },
+        },
+      },
+      { $sort: { count: -1 } },
+      { $group: { _id: null, searchKeywords: { $push: "$_id" } } },
+      { $project: { _id: 0, searchKeywords: 1 } },
+    ]);
+
+    if (result.length > 0) {
+      return res.status(200).json(result[0].searchKeywords);
+    } else {
+      return res.status(200).json([]);
+    }
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+router.get("/searchBy", async (req, res) => {
+  const searchTerm = req.query.searchturm.toLowerCase();
+  try {
+    const searchResults = await Product.find({
+      searchKeyword: { $regex: searchTerm, $options: "i" },
+    });
+    return res.status(200).json(searchResults);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
 module.exports = router;
