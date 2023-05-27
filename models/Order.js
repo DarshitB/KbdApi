@@ -21,6 +21,7 @@ const OrderSchema = new mongoose.Schema(
         Headrail: { type: String },
         OneTouchUpSystem: { type: String },
         PlainCassette: { type: String },
+        AddSystem: { type: String },
         /*  */
         ChainControl: { type: String },
         OpeningDirection: { type: String },

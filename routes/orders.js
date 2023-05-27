@@ -33,7 +33,7 @@ router.post("/", verifyToken, async (req, res) => {
         <tr>
           <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
           <td style="padding:0 10px">Title: ${getProduct.title}</td>
-          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, ControlOption: ${product.ControlOption}, FabricOption: ${product.FabricOption}, SizeOption: ${product.SizeOption}, WrappedOption: ${product.WrappedOption}, TopFixing: ${product.TopFixing},  MotoreHead ${product.OperatingSystem[0].Motorised}, RemoteHead - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Add On System: ${product.AddSystem}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
         </tr>
       `;
     } else if (product.type === "Vertical") {
@@ -41,8 +41,112 @@ router.post("/", verifyToken, async (req, res) => {
         <tr>
           <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
           <td style="padding:0 10px">Title: ${getProduct.title}</td>
-          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, ControlOption: ${product.ControlOption}, FabricOption: ${product.FabricOption}, ChainControl: ${product.ChainControl}, OpeningDirection: ${product.OpeningDirection}, MountingBracket: ${product.MountingBracket}, BallChainHook: ${product.BallChainHook}, MetelBallChain: ${product.MetelBallChain}, MotoreHead ${product.OperatingSystem[0].Motorised}, RemoteHead - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Chain Control: ${product.ChainControl}, Opening Direction: ${product.OpeningDirection}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
         </tr>
+      `;
+    } else if (product.type === "Wooden") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    } else if (product.type === "Sierra") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Chain Control: ${product.ChainControl}, Opening Direction: ${product.OpeningDirection}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    } else if (product.type === "Patricia") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    } else if (product.type === "Meliso") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Decorative Cassette: ${product.DecoraruveCassette}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    } else if (product.type === "Luzon") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Decorative Cassette: ${product.DecoraruveCassette}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    } else if (product.type === "Grayson") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Decorative Cassette: ${product.DecoraruveCassette}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    } else if (product.type === "Dorren") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Decorative Cassette: ${product.DecoraruveCassette}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    } else if (product.type === "Colby") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Pleat Size: ${product.pleatSize}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Clutch Operating System: ${product.ClutchOperating}, Day & Night: ${product.DayNight}, Top Down Bottom Up System: ${product.TopDownBottomUpSystem}, Motorised Bottom Down System: ${product.MotorisedBottomDownSystem}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+        </tr>
+      `;
+    } else if (product.type === "Aric") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}</td>
+        </tr>
+      `;
+    } else if (product.type === "Roman Skylight") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Fabric Option: ${product.FabricOption}</td>
+        </tr>
+      `;
+    } else if (product.type === "Colby Skylight") {
+      productsHtml += `
+        <tr>
+          <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+          <td style="padding:0 10px">Title: ${getProduct.title}</td>
+          <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Fabric Option: ${product.FabricOption}</td>
+        </tr>
+      `;
+    } else if (product.type === "Panel") {
+      productsHtml += `
+      <tr>
+        <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+        <td style="padding:0 10px">Title: ${getProduct.title}</td>
+        <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Select Track: ${product.Track}, Chain Control: ${product.ChainControl}, Opening Direction: ${product.OpeningDirection}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+      </tr>
+      `;
+    } else if (product.type === "Roman") {
+      productsHtml += `
+      <tr>
+        <td><img src="https://kbdapi.onrender.com/api/images/febrickBlind/${getProduct.img[0]}" style="width:60px;drop:60px;padding: 0 10px" /></td>
+        <td style="padding:0 10px">Title: ${getProduct.title}</td>
+        <td>Width: ${product.Width}, Drop: ${product.Drop}, type: ${product.type}, Control Option: ${product.ControlOption}, Fabric Option: ${product.FabricOption}, Mounting Bracket: ${product.MountingBracket}, Ball Chain Hanger: ${product.BallChainHook}, Metel Ball Chain: ${product.MetelBallChain}, One Touch Down System: ${product.OneTouchDownSystem}, Lining Option: ${product.LiningOption}, Motor - ${product.OperatingSystem[0].Motorised}, Remote - ${product.OperatingSystem[0].Remote}, Accessories - ${product.OperatingSystem[0].Accessories}</td>
+      </tr>
       `;
     }
   }
