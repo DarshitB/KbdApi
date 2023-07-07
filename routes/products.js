@@ -29,8 +29,17 @@ router.post(
   upload.array("img", 10),
   async (req, res) => {
     try {
-      const { title, desc, type, fabrics, price, isActive, searchKeyword } =
-        req.body;
+      const {
+        title,
+        desc,
+        type,
+        fabrics,
+        price,
+        isActive,
+        productCode,
+        manufactureCode,
+        searchKeyword,
+      } = req.body;
       var imageo = [];
       const blindImages = req.files;
       /* for (var i = 0; i < req.files.length; i++) {
@@ -58,6 +67,8 @@ router.post(
         type,
         fabrics: fabricsArray,
         price,
+        productCode,
+        manufactureCode,
         searchKeyword: KeywodArray,
         isActive,
       });
@@ -89,7 +100,16 @@ router.put(
   upload.array("img", 10),
   async (req, res) => {
     try {
-      const { title, desc, fabrics, searchKeyword, price, isActive } = req.body;
+      const {
+        title,
+        desc,
+        fabrics,
+        searchKeyword,
+        price,
+        productCode,
+        manufactureCode,
+        isActive,
+      } = req.body;
       const blindImages = req.files;
 
       const updatedProduct = await Product.findById(req.params.id);
@@ -102,6 +122,8 @@ router.put(
         updatedProduct.title = title;
         updatedProduct.desc = desc;
         updatedProduct.price = parseFloat(price);
+        updatedProduct.productCode = productCode;
+        updatedProduct.manufactureCode = manufactureCode;
         updatedProduct.isActive = isActive;
         updatedProduct.searchKeyword = KeywodArray;
         if (fabrics) {
@@ -124,6 +146,8 @@ router.put(
         updatedProduct.title = title;
         updatedProduct.desc = desc;
         updatedProduct.price = parseFloat(price);
+        updatedProduct.productCode = productCode;
+        updatedProduct.manufactureCode = manufactureCode;
         updatedProduct.isActive = isActive;
         updatedProduct.searchKeyword = KeywodArray;
         if (fabrics) {

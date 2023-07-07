@@ -122,4 +122,24 @@ router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get("/findIfExistCity/:city", async (req, res) => {
+  const checkcity = await PostalcodePrice.find({ city: req.params.city });
+  if (checkcity.length !== 0) {
+    res.status(200).json(true);
+  } else {
+    res.status(200).json(false);
+  }
+});
+router.get("/findIfExistCityPostalcode/:city/:postalcode", async (req, res) => {
+  const checkcity = await PostalcodePrice.find({
+    city: req.params.city,
+    postcode: req.params.postalcode,
+  });
+  if (checkcity.length !== 0) {
+    res.status(200).json(true);
+  } else {
+    res.status(200).json(false);
+  }
+});
 module.exports = router;
